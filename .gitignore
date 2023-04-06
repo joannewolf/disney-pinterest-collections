@@ -1,0 +1,12 @@
+venv/
+run/
+static/
+!*/pages/static/
+*.pyc
+*.sqlite3
+*.DS_Store
+*.mo
+*.log
+*.json
+**/components
+celerybeat-schedule
