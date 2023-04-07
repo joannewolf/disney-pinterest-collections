@@ -13,6 +13,7 @@ class ArtistAdmin(admin.ModelAdmin):
             'twitter_url', 'weibo_url', 'other_url',
         )}),
     )
+    search_fields = ['name']
     list_display = ['serial_number', 'name']
     ordering = ['serial_number']
 

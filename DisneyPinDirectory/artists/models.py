@@ -1,11 +1,12 @@
 from django.db import models
+from DisneyPinDirectory.utils import getUrlList
 
 from tags.models import Tag
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=64, null=True, blank=True)
-    serial_number = models.PositiveIntegerField(null=False)
+    serial_number = models.PositiveIntegerField(null=False, unique=True)
     pinterest_page_url = models.URLField(max_length=128, null=True, blank=True)
 
     artstation_url = models.CharField(max_length=128, null=True, blank=True)
@@ -25,6 +26,24 @@ class Artist(models.Model):
             return f'{self.serial_number:03} {self.name}'
         else:
             return f'{self.serial_number:03}'
+
+    def as_dict(self):
+        return {
+            'name': self.name,
+            'serial_number': f'{self.serial_number:03}',
+            'pinterest_page_url': self.pinterest_page_url,
+            'artstation_url': getUrlList(self.artstation_url),
+            'behance_url': getUrlList(self.behance_url),
+            'deviantart_url': getUrlList(self.deviantart_url),
+            'facebook_url': getUrlList(self.facebook_url),
+            'instagram_url': getUrlList(self.instagram_url),
+            'pinterest_url': getUrlList(self.pinterest_url),
+            'pixiv_url': getUrlList(self.pixiv_url),
+            'tumblr_url': getUrlList(self.tumblr_url),
+            'twitter_url': getUrlList(self.twitter_url),
+            'weibo_url': getUrlList(self.weibo_url),
+            'other_url': getUrlList(self.other_url),
+        }
 
 
 class Board(models.Model):
