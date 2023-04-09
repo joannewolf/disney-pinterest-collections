@@ -1,7 +1,7 @@
 .artist-url {
   padding: 5px; }
 
-#board-table-content th {
+#board-table-content th, #board-table-content td {
   vertical-align: middle; }
 
 #board-table-content .tag-label {

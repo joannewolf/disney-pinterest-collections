@@ -16,7 +16,7 @@
             <div class="x_panel">
                 <div class="x_title">
                     <a href={{artist.pinterest_page_url}} target="_blank">
-                        <h2>{{artist.serial_number}} {{artist.name}}</h2>
+                        <h2>{{artist.serial_number}} {{artist.name}}  <i class="fa fa-external-link"></i></h2>
                     </a>
                     <div class="clearfix"></div>
                 </div>
@@ -118,6 +118,7 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Boards</h2>
+                    <h2 id="artist-number" hidden>{{artist.serial_number}}</h2>
                     <div class="align-right-btn-div">
                         <button class="btn btn-primary btn-create btn-custom"
                             data-toggle="modal" data-target="#create-board-modal"
@@ -132,23 +133,12 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th style="width:5%">Name</th>
+                                <th style="width:5%">Action</th>
                                 <th>Tags</th>
                             </tr>
                         </thead>
                         <tbody id="board-table-content">
-                        {% for board in artist.boards %}
-                            <tr>
-                                <th>{{board.name}}</th>
-                                <th>
-                                    {% for tag in board.tags %}
-                                        <label class="tag-label" style="background-color:{{tag.color}};">
-                                            {{tag.name}}
-                                        </label>
-                                    {% endfor %}
-                                </th>
-                            </tr>
-                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -157,6 +147,7 @@
     </div>
 {% endif %}
 
+<!-- create board modal -->
 <div id="create-board-modal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -178,7 +169,7 @@
                     <div class="category-value" >
                     {% for tag in category.tags %}
                         <label class="tag-label" style="background-color:{{tag.color}};">
-                            <input type="checkbox" name="options" id="tag-{{tag.id}}">{{tag.name}}
+                            <input type="checkbox" name="create-tag" value={{tag.id}}>{{tag.name}}
                         </label>
                     {% endfor %}
                     </div>
@@ -188,6 +179,49 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="create-button">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update board modal -->
+<div id="update-board-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Board</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group" hidden>
+                    <div class="control-label">Board id</div>
+                    <div class="value" id="update-board-id"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label required">Name</div>
+                    <input type="text" class="value form-control" id="update-board-name">
+                </div>
+                <div class="control-label required">Tags</div>
+
+                {% for category in categories %}
+                <div>
+                    <div class="category-label">{{category.name}}</div>
+                    <div class="category-value" >
+                    {% for tag in category.tags %}
+                        <label class="tag-label"  id="update-tag-{{tag.id}}" style="background-color:{{tag.color}};">
+                            <input type="checkbox" name="update-tag" value={{tag.id}}>{{tag.name}}
+                        </label>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="update-button">Update</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
