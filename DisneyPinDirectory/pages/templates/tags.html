@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}
+<link href="{% static 'css/common/common.css' %}" rel="stylesheet">
+<link href="{% static 'css/tags/tags.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>By Tags</h2>
+            <div class="clearfix"></div>
+        </div>
+
+        {% for category in categories %}
+            <h5 class="category-header">{{category.name}}</h5>
+            {% for tag in category.tags %}
+                <a href="tags/{{tag.id}}" target="_blank">
+                    <button type="button" class="btn btn-round"
+                        style="color:white;background-color:{{tag.color}};"
+                    >
+                        {{tag.name}}
+                    </button>
+                </a>
+            {% endfor %}
+        {% endfor %}
+        
+        <div class="row">
+            <div class="btn-group form-check" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                <input type="checkbox" class="join-btn" name="options" id="option1"> Option 1
+                </label>
+                <label class="btn btn-secondary">
+                <input type="checkbox" name="options" class="join-btn" id="option2"> Option 2
+                </label>
+                <label class="btn btn-secondary active focus">
+                <input type="checkbox" name="options" class="join-btn" id="option3"> Option 3
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'js/tags.js' %}"></script>
+{% endblock %}

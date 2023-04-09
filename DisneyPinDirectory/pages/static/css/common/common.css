@@ -4,3 +4,30 @@
 
 .icon-img {
   height: 20px; }
+
+.modal-body .control-label {
+  width: 10%;
+  margin: auto 5px;
+  margin-right: 10px; }
+
+.modal-body .form-group {
+  margin: 10px auto;
+  display: flex; }
+  .modal-body .form-group .form-control {
+    margin: auto 10px;
+    width: 75%;
+    border-radius: 4px; }
+  .modal-body .form-group .value {
+    margin: auto 5px;
+    width: 75%;
+    font-size: small; }
+  .modal-body .form-group .content-label {
+    margin-bottom: 10px; }
+  .modal-body .form-group .hint-text {
+    font-size: 10px;
+    float: left; }
+  .modal-body .form-group .file-value {
+    margin: auto 5px;
+    width: 50%; }
+  .modal-body .form-group .form-textarea {
+    margin: auto; }

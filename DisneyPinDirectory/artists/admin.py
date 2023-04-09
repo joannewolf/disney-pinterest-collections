@@ -20,4 +20,5 @@ class ArtistAdmin(admin.ModelAdmin):
 
 @admin.register(Board)
 class BoardAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name']
+    list_display = ['artist', 'name']
+    ordering = ['artist', 'name']

@@ -6,3 +6,46 @@
 .icon-img {
     height: 20px;
 }
+
+.modal-body {
+    .control-label {
+        width: 10%;
+        margin: auto 5px;
+        margin-right: 10px;
+    }
+
+    .form-group {
+        margin: 10px auto;
+        display: flex;
+
+        .form-control {
+            margin: auto 10px;
+            width: 75%;
+            border-radius: 4px;
+        }
+
+        .value {
+            margin: auto 5px;
+            width: 75%;
+            font-size: small;
+        }
+
+        .content-label {
+            margin-bottom: 10px;
+        }
+
+        .hint-text {
+            font-size: 10px;
+            float: left;
+        }
+
+        .file-value {
+            margin: auto 5px;
+            width: 50%;
+        }
+
+        .form-textarea {
+            margin: auto;
+        }
+    }
+}

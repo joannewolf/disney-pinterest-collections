@@ -43,6 +43,7 @@ class Artist(models.Model):
             'twitter_url': getUrlList(self.twitter_url),
             'weibo_url': getUrlList(self.weibo_url),
             'other_url': getUrlList(self.other_url),
+            'boards': [b.as_simple_dict() for b in self.board_set.all()]
         }
 
 
@@ -53,3 +54,16 @@ class Board(models.Model):
 
     def __str__(self):
         return self.name
+
+    def as_dict(self):
+        return {
+            'name': self.name,
+            'artist': self.artist.as_dict(),
+            'tags': [t.as_dict() for t in self.tags.all()],
+        }
+
+    def as_simple_dict(self):
+        return {
+            'name': self.name,
+            'tags': [t.as_simple_dict() for t in self.tags.all()],
+        }

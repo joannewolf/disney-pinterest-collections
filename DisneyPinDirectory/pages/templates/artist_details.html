@@ -116,22 +116,87 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                {% for url in artist.artstation_url %}
-                    <div class="artist-url">
-                        <img class="icon-img" src="../media/artstation.webp"/>
-                        &emsp;
-                        <a href="{{url}}" target="_blank">{{url}}</a>
-                        <br/>
+                <div class="x_title">
+                    <h2>Boards</h2>
+                    <div class="align-right-btn-div">
+                        <button class="btn btn-primary btn-create btn-custom"
+                            data-toggle="modal" data-target="#create-board-modal"
+                        >
+                            Add Board
+                        </button>
                     </div>
-                {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="custom-table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Tags</th>
+                            </tr>
+                        </thead>
+                        <tbody id="board-table-content">
+                        {% for board in artist.boards %}
+                            <tr>
+                                <th>{{board.name}}</th>
+                                <th>
+                                    {% for tag in board.tags %}
+                                        <label class="tag-label" style="background-color:{{tag.color}};">
+                                            {{tag.name}}
+                                        </label>
+                                    {% endfor %}
+                                </th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 {% endif %}
 
+<div id="create-board-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Board</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="control-label required">Name</div>
+                    <input type="text" class="value form-control" id="create-board-name">
+                </div>
+                <div class="control-label required">Tags</div>
+
+                {% for category in categories %}
+                <div>
+                    <div class="category-label">{{category.name}}</div>
+                    <div class="category-value" >
+                    {% for tag in category.tags %}
+                        <label class="tag-label" style="background-color:{{tag.color}};">
+                            <input type="checkbox" name="options" id="tag-{{tag.id}}">{{tag.name}}
+                        </label>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="create-button">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js %}
 {{ block.super }}
-<script src="{% static 'js/serial_numbers.js' %}"></script>
+<script src="{% static 'js/artist_details.js' %}"></script>
 {% endblock %}

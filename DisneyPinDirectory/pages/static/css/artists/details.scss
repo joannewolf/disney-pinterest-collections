@@ -1,3 +1,42 @@
 .artist-url {
     padding: 5px;
 }
+
+#board-table-content {
+    th {
+        vertical-align: middle;
+    }
+
+    .tag-label {
+        color: white;
+        padding: 5px;
+        border-radius: 25px;
+        margin-bottom: 0px;
+    }
+}
+
+.modal-body {
+    .category-label {
+        margin: auto 10px;
+    }
+
+    .category-value {
+        margin: auto 10px;
+    }
+
+    .tag-label {
+        color: white;
+        padding: 5px;
+        border-radius: 25px;
+    }
+
+    .checked {
+        border-style: solid;
+        border-width: medium;
+        border-color: black;
+    }
+
+    input[type=checkbox] {
+        -webkit-appearance: none;
+    }
+}
