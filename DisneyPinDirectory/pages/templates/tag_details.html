@@ -20,94 +20,47 @@
                 <div class="clearfix"></div>
             </div>
 
-            {% for url in artist.artstation_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/artstation.webp"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.behance_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/behance.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.deviantart_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/deviantart.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.facebook_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/facebook.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.instagram_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/instagram.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.pinterest_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/pinterest.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.pixiv_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/pixiv.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.tumblr_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/tumblr.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.twitter_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/twitter.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.weibo_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/weibo.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
-            {% for url in artist.other_url %}
-                <div class="artist-url">
-                    <img class="icon-img" src="../media/personal.png"/>
-                    &emsp;
-                    <a href="{{url}}" target="_blank">{{url}}</a>
-                    <br/>
-                </div>
-            {% endfor %}
+            <div class="custom-table">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:10%">Artist</th>
+                            <th style="width:5%">Board Name</th>
+                            <th>Tags</th>
+                        </tr>
+                    </thead>
+                    <tbody id="board-table-content">
+                    {% for board in boards %}
+                        <tr>
+                            <th>
+                                <a href="/artists/{{board.artist.serial_number}}">
+                                {% if board.artist.name%}
+                                    {{board.artist.name}}
+                                {% else %}
+                                    <th>-</th>
+                                {% endif %}
+                                </a>
+                                &emsp;
+                                <a href={{board.artist.pinterest_page_url}} target="_blank">
+                                    <img class="icon-img" src="../media/pinterest.png"/>
+                                </a>
+                            </th>
+                            <th>{{board.name}}</th>
+                            <th>
+                                {% for tag in board.tags %}
+                                <a href=/tags/{{tag.id}}>
+                                    <label class="tag-label" style="background-color:{{tag.color}};">
+                                    {{tag.name}}
+                                    </label>
+                                </a>
+                                {% endfor %}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 {% endif %}

@@ -4,3 +4,16 @@
     padding-right: 20px;
     border-radius: 25px;
 }
+
+#board-table-content {
+    th, td {
+        vertical-align: middle;
+    }
+
+    .tag-label {
+        color: white;
+        padding: 5px;
+        border-radius: 25px;
+        margin-bottom: 0px;
+    }
+}

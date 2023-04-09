@@ -1,6 +1,6 @@
 from django.views.generic.base import TemplateView
 
-from artists.models import Artist
+from artists.models import Artist, Board
 from tags.models import Category, Tag
 
 
@@ -70,6 +70,9 @@ class TagDetailView(TemplateView):
         except Tag.DoesNotExist:
             context['error_message'] = 'Invalid tag id.'
             return context
-
         context['tag'] = tag.as_dict()
+
+        boards = tag.board_set.all().order_by('name')
+        boards = [b.as_dict() for b in boards]
+        context['boards'] = boards
         return context

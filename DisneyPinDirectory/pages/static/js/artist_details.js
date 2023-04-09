@@ -153,9 +153,11 @@ const boardDataToHtmlString = (data) => {
     let tagsHtml = '';
     for (const tag of tags) {
         const tagHtml = `
-            <label class="tag-label" style="background-color:${tag.color};">
-                ${tag.name}
-            </label>`;
+            <a href=/tags/${tag.id}>
+                <label class="tag-label" style="background-color:${tag.color};">
+                    ${tag.name}
+                </label>
+            </a>`;
         tagsHtml = tagsHtml.concat(tagHtml);
     }
     const tagsId = tags.map(({ id }) => id).join(',');

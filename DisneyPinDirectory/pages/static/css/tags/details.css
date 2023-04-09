@@ -3,3 +3,12 @@
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 25px; }
+
+#board-table-content th, #board-table-content td {
+  vertical-align: middle; }
+
+#board-table-content .tag-label {
+  color: white;
+  padding: 5px;
+  border-radius: 25px;
+  margin-bottom: 0px; }
