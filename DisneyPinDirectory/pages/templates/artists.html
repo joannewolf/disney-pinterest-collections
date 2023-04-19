@@ -4,6 +4,7 @@
 
 {% block css %}
 <link href="{% static 'css/common/common.css' %}" rel="stylesheet">
+<link href="{% static 'css/artists/artists.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -11,6 +12,14 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>By Serial Number</h2>
+            <h2 id="max-artist-number" hidden>{{max_artist_number}}</h2>
+            <div class="align-right-btn-div">
+                <button class="btn btn-primary btn-create btn-custom"
+                    data-toggle="modal" data-target="#create-artist-modal"
+                >
+                    Add artist
+                </button>
+            </div>
             <div class="clearfix"></div>
         </div>
 
@@ -18,29 +27,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width:5%">#</th>
                         <th>Name</th>
                     </tr>
                 </thead>
-                <tbody>
-                {% for artist in artists %}
-                    <tr>
-                        <th>{{artist.serial_number}}</th>
-                        <th>
-                            <a href={{artist.pinterest_page_url}} target="_blank">
-                                <img class="icon-img" src="../media/pinterest.png"/>
-                            </a>
-                            &emsp;
-                            <a href="/artists/{{artist.serial_number}}" target="_blank">
-                                {% if artist.name %}
-                                    {{artist.name}}
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </a>
-                        </th>
-                    </tr>
-                {% endfor %}
+                <tbody id="artist-table-content">
                 </tbody>
             </table>
         </div>
@@ -48,9 +39,120 @@
     </div>
 </div>
 
+<!-- create artist modal -->
+<div id="create-artist-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Artist</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="control-label required">Serial Number</div>
+                    <input type="text" class="value form-control" id="create-artist-serial-number" readonly>
+                </div>
+                <div class="form-group">
+                    <div class="control-label required">Name</div>
+                    <input type="text" class="value form-control" id="create-artist-name">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">Pinterest page URL</div>
+                    <input type="text" class="value form-control" id="create-artist-pinterest-page-url">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/artstation.webp"/>&nbsp;
+                        artstation URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-artstation-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/behance.png"/>&nbsp;
+                        behance URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-behance-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/deviantart.png"/>&nbsp;
+                        deviantart URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-deviantart-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/facebook.png"/>&nbsp;
+                        facebook URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-facebook-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/instagram.png"/>&nbsp;
+                        instagram URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-instagram-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/pinterest.png"/>&nbsp;
+                        pinterest URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-pinterest-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/pixiv.png"/>&nbsp;
+                        pixiv URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-pixiv-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/tumblr.png"/>&nbsp;
+                        tumblr URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-tumblr-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/twitter.png"/>&nbsp;
+                        twitter URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-twitter-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/weibo.png"/>&nbsp;
+                        weibo URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-weibo-url">
+                </div>
+                <div class="form-group">
+                    <div class="control-label">
+                        <img class="icon-img" src="../media/personal.png"/>&nbsp;
+                        other URL
+                    </div>
+                    <input type="text" class="value form-control" id="create-artist-other-url">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="create-button">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js %}
 {{ block.super }}
-<script src="{% static 'js/serial_numbers.js' %}"></script>
+<script src="{% static 'js/artists.js' %}"></script>
 {% endblock %}

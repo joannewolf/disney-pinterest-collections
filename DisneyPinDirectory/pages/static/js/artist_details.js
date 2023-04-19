@@ -6,7 +6,7 @@ $(document).ready(() => {
     });
     $('.btn-update').click(btnUpdateListener);
 
-    fetchBoards()
+    fetchBoards();
 });
 
 $('.tag-label input[type=checkbox]').change(function() {
@@ -41,7 +41,7 @@ const fetchBoards = () => {
     $(tableName).append(htmlString);
 
     const artistNumber = $('#artist-number').html();
-    const url = `/artists/${artistNumber}/boards`;
+    const url = `/api/artists/${artistNumber}/boards`;
     $.ajax({
         type: 'GET',
         url,
@@ -70,7 +70,7 @@ $('#create-button').click(function() {
 
 const createBoard = (name, tagsId) => {
     const artistNumber = $('#artist-number').html();
-    const url = `/artists/${artistNumber}/board/create`;
+    const url = `/api/artists/${artistNumber}/board/create`;
     const formData = new FormData();
 
     formData.append('name', name);
@@ -88,8 +88,11 @@ const createBoard = (name, tagsId) => {
         $('#create-board-modal').modal('hide');
         alertSuccess('新增');
 
-        const newBoardHtml = boardDataToHtmlString(data['data']);
-        $('#board-table-content tr:last').after(newBoardHtml);
+        const newBoardHtml = `
+            <tr id="board-info-${data['data']['id']}">
+                ${boardDataToHtmlString(data['data'])}
+            </tr>`;
+        $('#board-table-content').append(newBoardHtml);
         $('.btn-update').unbind('click');
         $('.btn-update').click(btnUpdateListener);
     }).fail(function(xhr) {
@@ -115,7 +118,7 @@ $('#update-button').click(function() {
 
 const updateBoard = (boardId, name, tagsId) => {
     const artistNumber = $('#artist-number').html();
-    const url = `/artists/${artistNumber}/board/${boardId}/update`;
+    const url = `/api/artists/${artistNumber}/board/${boardId}/update`;
     const formData = new FormData();
 
     formData.append('name', name);

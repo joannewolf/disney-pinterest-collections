@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.views.generic.base import TemplateView
 
 from artists.models import Artist, Board
@@ -12,6 +13,7 @@ class ArtistsView(TemplateView):
         context = super(ArtistsView, self).get_context_data(**kwargs)
         artists = Artist.objects.all().order_by('serial_number')
         context['artists'] = [a.as_dict() for a in artists]
+        context['max_artist_number'] = Artist.objects.all().aggregate(Max('serial_number'))['serial_number__max']
         return context
 
 

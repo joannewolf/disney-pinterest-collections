@@ -33,16 +33,16 @@
                     {% for board in boards %}
                         <tr>
                             <th>
+                                <a href={{board.artist.pinterest_page_url}} target="_blank">
+                                    <img class="icon-img" src="../media/pinterest.png"/>
+                                </a>
+                                &emsp;
                                 <a href="/artists/{{board.artist.serial_number}}">
                                 {% if board.artist.name%}
                                     {{board.artist.name}}
                                 {% else %}
                                     <th>-</th>
                                 {% endif %}
-                                </a>
-                                &emsp;
-                                <a href={{board.artist.pinterest_page_url}} target="_blank">
-                                    <img class="icon-img" src="../media/pinterest.png"/>
                                 </a>
                             </th>
                             <th>{{board.name}}</th>

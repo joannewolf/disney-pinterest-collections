@@ -1,0 +1,7 @@
+#artist-table-content th, #artist-table-content td {
+  vertical-align: middle; }
+
+.modal-body .control-label {
+  width: 30%;
+  margin: auto 5px;
+  margin-right: 10px; }
